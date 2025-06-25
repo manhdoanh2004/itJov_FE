@@ -11,10 +11,10 @@ export const metadata: Metadata = {
   description: "Mô tả trang chi tiết công ty...",
 }
 
-export default async function CompanyDetailPage({params}:{
-  params:{
-    slug:string
-  }
+export default async function CompanyDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
 }) {
 
   const  {slug }= await params;

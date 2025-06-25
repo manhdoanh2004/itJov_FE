@@ -6,10 +6,10 @@ export const metadata: Metadata = {
   description: "Mô tả trang chỉnh sửa công việc...",
 }
 
-export default async function CompanyManageJobEditPage({ params }: {
-  params: {
-    id: string
-  }
+export default async function CompanyManageJobEditPage({
+  params,
+}: {
+  params: Promise<{ id: string }>
 }) {
   const { id } = await params;
 
