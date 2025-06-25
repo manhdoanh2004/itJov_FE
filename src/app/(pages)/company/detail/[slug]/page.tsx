@@ -1,6 +1,6 @@
-/* eslint-disable prefer-const */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 /* eslint-disable @next/next/no-img-element */
 import { Metadata } from "next"
 import { FaLocationDot } from "react-icons/fa6"

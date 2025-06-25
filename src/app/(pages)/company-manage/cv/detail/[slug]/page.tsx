@@ -1,6 +1,6 @@
-/* eslint-disable prefer-const */
+
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { Metadata } from "next"
 import { headers } from "next/headers"
 import Link from "next/link"
@@ -17,7 +17,7 @@ export default async function CompanyManageCVDetailPage({ params }:{
   }
 }) {
 
-  const { slug}= await params;
+  const { slug}=  params;
  
   let cv=null;
   let job:any=null;
