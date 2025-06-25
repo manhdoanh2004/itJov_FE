@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   description: "Mô tả trang chi tiết CV...",
 }
 
-export default async function CompanyManageCVDetailPage({ params }:{
-  params:{
-    slug:any
-  }
+export default async function CompanyManageCVDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
 }) {
 
-  const { slug}=  params;
+  const { slug}=  await params;
  
   let cv=null;
   let job:any=null;
