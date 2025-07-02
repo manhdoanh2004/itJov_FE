@@ -34,6 +34,10 @@ export const useAuth = () => {
           }
          
         }
+        else
+        {
+             console.log(data);
+        }
       });
   }, [pathname]);
 
