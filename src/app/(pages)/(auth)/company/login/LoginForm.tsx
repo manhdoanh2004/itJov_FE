@@ -74,6 +74,7 @@ export const LoginFrom=()=>
             }
   
             if(data.code == "success") {
+                console.log(data)
               router.push("/");
             }
           })

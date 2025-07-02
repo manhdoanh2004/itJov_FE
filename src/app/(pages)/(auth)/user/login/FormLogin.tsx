@@ -71,6 +71,7 @@ export const FormLogin = () => {
             }
   
             if(data.code == "success") {
+              console.log(data)
               router.push("/");
             }
           })
