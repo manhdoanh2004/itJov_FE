@@ -21,6 +21,7 @@ export const useAuth = () => {
 
         if(data.code == "success") {
           setIsLogin(true);
+          console.log(data);
           if(data.infoUser)
             {
               setInfoUser(data.infoUser);

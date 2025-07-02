@@ -20,7 +20,7 @@ export default async function CompanyDetailPage({
   const  {slug }= await params;
   let companyDetail=null;
   let jobList=[];
-
+console.log(slug)
 
   const res =await fetch(`${process.env.NEXT_PUBLIC_API_URL}/company/detail/${slug}`);
   const data = await res.json();
