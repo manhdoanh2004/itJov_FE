@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
+import { useAuth } from "@/hooks/useAuth";
 import JustValidate from "just-validate";
 import { useEffect } from "react";
 import { Toaster, toast } from 'sonner';
@@ -11,9 +13,12 @@ export const FormApply = (props:{
     jobId:string
 }) => {
    const {jobId}=props;
-
+   const { isLogin} = useAuth();
    useEffect(() => {
-    const validator = new JustValidate("#formApply");
+
+    if(isLogin)
+    {
+         const validator = new JustValidate("#formApply");
 
     validator
       .addField('#fullName', [
@@ -134,13 +139,20 @@ export const FormApply = (props:{
       });
     
       })
+    }
+   
   }, []);
 
 
    
     return (
         <>
-          <Toaster richColors position="top-right" />
+        {isLogin?(<>
+            <Toaster richColors position="top-right" />
+             <div className="border border-[#DEDEDE] rounded-[8px] p-[20px] mt-[20px]">
+            <h2 className="font-[700] text-[20px] text-black mb-[20px]">
+                    Ứng tuyển ngay
+                  </h2>
             <form action="" id="formApply" className="">
                 <div className="mb-[15px]">
                     <label
@@ -203,6 +215,9 @@ export const FormApply = (props:{
                     Gửi CV ứng tuyển
                 </button>
             </form>
+            </div>
+        </>):(<></>)}
+        
         </>
     )
 }

@@ -112,12 +112,9 @@ export default async function JobDetailPage({
                 {/* Hết Mô tả chi tiết */}
 
                 {/* Form ứng tuyển */}
-                <div className="border border-[#DEDEDE] rounded-[8px] p-[20px] mt-[20px]">
-                  <h2 className="font-[700] text-[20px] text-black mb-[20px]">
-                    Ứng tuyển ngay
-                  </h2>
+               
                     <FormApply jobId={slug}/>
-                </div>
+              
                 {/* Hết Form ứng tuyển */}
               </div>
               {/* Right */}
