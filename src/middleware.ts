@@ -5,6 +5,7 @@ export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
     console.log('Token from cookie:', token);
   if(token) {
+    console.log("lấy được token")
     return NextResponse.next();
   } else {
     return NextResponse.redirect(new URL('/', request.url));

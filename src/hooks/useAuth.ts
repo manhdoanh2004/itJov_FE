@@ -11,7 +11,13 @@ export const useAuth = () => {
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/check`, {
-      credentials: "include", // Gửi kèm cookie
+      method:"POST",
+      headers:{
+          "Content-Type":"application/json"
+      },
+      credentials: "include", // Gửi kèm cookie,,
+      body:JSON.stringify({})
+    
     })
       .then(res => res.json())
       .then(data => {

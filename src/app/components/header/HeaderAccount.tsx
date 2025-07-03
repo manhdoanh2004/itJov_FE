@@ -10,7 +10,8 @@ export const HeaderAccount = () => {
 
   const handleLogout = (url:any) => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/logout`, {
-      credentials: "include", // Gửi kèm cookie
+      credentials: "include", // Gửi kèm cookie,
+      method:"DELETE"
     })
       .then(res => res.json())
       .then(data => {
