@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 export const useAuth = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState<any>();
  const [infoUser, setInfoUser] = useState<any>();
  const [infoCompany, setInfoCompany] = useState<any>();
   const pathname = usePathname(); // Lấy URL hiện tại

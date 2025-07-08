@@ -10,6 +10,7 @@ import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { Toaster, toast } from 'sonner'
+import { useRouter } from "next/navigation";
 
 
 // Đăng ký plugins
@@ -21,9 +22,16 @@ registerPlugin(
 
 export const FormProfile=()=>
 {
-    const { infoUser } = useAuth();
+    const { infoUser, isLogin } = useAuth();
     const [avatars, setAvatars] = useState<any[]>([]);
     const [isValid, setIsValid] = useState(false);
+    const router = useRouter();
+
+    useEffect(() => {
+      if(isLogin === false) {
+        router.push("/");
+      }
+    }, [isLogin]);
 
 
     useEffect(() => {
@@ -143,7 +151,7 @@ export const FormProfile=()=>
         <Toaster position="top-right"
           richColors  
         />
-        {infoUser&&   
+        {infoUser &&   
                 (<>
                 <form onSubmit={(event)=>handleSubmit(event)} id="profileForm" className="grid sm:grid-cols-2 grid-cols-1 gap-x-[20px] gap-y-[15px]">
               <div className="sm:col-span-2">
