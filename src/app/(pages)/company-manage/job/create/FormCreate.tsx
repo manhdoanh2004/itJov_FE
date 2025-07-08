@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
@@ -11,6 +13,8 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 import { Toaster, toast } from 'sonner';
 import { positionList ,workingFromList} from "@/config/variables";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 // Đăng ký plugins
 registerPlugin(
@@ -22,6 +26,15 @@ export const FormCreate = () => {
   const editorRef = useRef(null);
   const [isValid, setIsValid] = useState(false);
   const [images, setImages] = useState<any[]>([]);
+
+    const { infoUser, isLogin } = useAuth();
+     const router = useRouter();
+  
+      useEffect(() => {
+        if(isLogin === false) {
+          router.push("/");
+        }
+      }, [isLogin]);
 
   useEffect(() => {
     const validator = new JustValidate("#createForm");

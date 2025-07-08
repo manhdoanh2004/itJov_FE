@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -14,16 +15,25 @@ import { Toaster, toast } from "sonner";
 import { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { EditorMCE } from "@/app/components/editor/EditorMCE";
+import { useRouter } from "next/navigation";
 
 // Đăng ký plugins
 registerPlugin(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 
 export const FormProfile = () => {
   const editorRef = useRef(null);
-  const { infoCompany } = useAuth();
+  const { infoCompany,isLogin } = useAuth();
   const [logos, setLogos] = useState<any[]>([]);
   const [isValid, setIsValid] = useState(false);
   const [cityList, setCityList] = useState<any[]>([]);
+   const router = useRouter();
+
+    useEffect(() => {
+      if(isLogin === false) {
+        router.push("/");
+      }
+    }, [isLogin]);
+
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/city/list`)

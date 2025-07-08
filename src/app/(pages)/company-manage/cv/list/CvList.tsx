@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -7,6 +8,8 @@ import { useEffect, useState } from "react"
 import { FaBriefcase, FaCircleCheck, FaEnvelope, FaEye, FaPhone, FaUserTie } from "react-icons/fa6"
 import {workingFromList,positionList,cvStatusList} from "../../../../../config/variables"
 import { CvItem } from "./CvItem"
+import { useAuth } from "@/hooks/useAuth"
+import { useRouter } from "next/navigation"
 
 export const CvList=()=>
 {
@@ -14,7 +17,14 @@ export const CvList=()=>
      const [totalPage, setTotalPage] = useState(0);
      const [page, setPage] = useState(1);
 
-
+      const { infoUser, isLogin } = useAuth();
+       const router = useRouter();
+    
+        useEffect(() => {
+          if(isLogin === false) {
+            router.push("/");
+          }
+        }, [isLogin]);
     useEffect(()=>
     {
         fetch(`${process.env.NEXT_PUBLIC_API_URL}/company/cv/list?page=${page}`,{

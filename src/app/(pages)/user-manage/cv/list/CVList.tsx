@@ -1,8 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { cvStatusList, positionList, workingFromList } from "@/config/variables";
+import { useAuth } from "@/hooks/useAuth";
 import Link from "next/link"
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaBriefcase, FaCircleCheck, FaUserTie } from "react-icons/fa6"
 
@@ -10,6 +14,14 @@ export const CVList = () => {
   const [listCV, setListCV] = useState<any[]>([]);
   const [page,setPage]=useState(1);
   const [totalPage,setTotalPage]=useState(1);
+  const { infoUser, isLogin } = useAuth();
+   const router = useRouter();
+
+    useEffect(() => {
+      if(isLogin === false) {
+        router.push("/");
+      }
+    }, [isLogin]);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/cv/list?page=${page}`, {
@@ -69,6 +81,9 @@ export const CVList = () => {
               <div className="mt-[12px] text-center font-[400] text-[14px] text-black">
                 Công ty: <Link href={`/company/detail/${item.companyId}`} className="font-[700] relative z-10 ">{item.companyName}</Link>
               </div>
+              <div className="mt-[12px] text-center font-[400] text-[14px] text-black">
+                Thời gian ứng tuyển : {item.createdAtFormat}
+              </div>
               <div className="mt-[6px] text-center font-[600] text-[16px] text-[#0088FF]">
                 {item.jobSalaryMin.toLocaleString("vi-VN")}$ - {item.jobSalaryMax.toLocaleString("vi-VN")}$
               </div>
@@ -87,7 +102,10 @@ export const CVList = () => {
                 <FaCircleCheck className="text-[16px]" /> {status?.label}
               </div>
               <div className="flex flex-wrap items-center justify-center gap-[8px] mt-[12px] mb-[20px] mx-[10px]">
-                <Link href="#" className="bg-[#0088FF] rounded-[4px] font-[400] text-[14px] text-white inline-block py-[8px] px-[20px]">
+                <Link href={`${item.fileCV}`}
+                    target="_blank" // Mở trong tab/cửa sổ mới
+              rel="noopener noreferrer" // Quan trọng cho bảo mật và hiệu suất
+                className="bg-[#0088FF] rounded-[4px] font-[400] text-[14px] text-white inline-block py-[8px] px-[20px]">
                   Xem CV
                 </Link>
                 {/* <Link href="#" className="bg-[#FF0000] rounded-[4px] font-[400] text-[14px] text-white inline-block py-[8px] px-[20px]">

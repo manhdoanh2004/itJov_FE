@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
@@ -8,12 +9,22 @@ import { useEffect, useState } from "react";
 import { FaBriefcase, FaLocationDot, FaUserTie } from "react-icons/fa6";
 import { positionList ,workingFromList} from "@/config/variables";
 import { ButtonDelete } from "@/app/components/buttons/ButtonDelete";
+import { useAuth } from "@/hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 export const JobList = () => {
   const [totalPage, settotalPage] = useState<any>(1);
   const [jobList, setJobList] = useState<any[]>([]);
   const [page,Setpage]=useState<number>(1);
   const [count,Setcount]=useState<number>(1);
+  const { infoUser, isLogin } = useAuth();
+  const router = useRouter();
+
+     useEffect(() => {
+      if(isLogin === false) {
+        router.push("/");
+      }
+    }, [isLogin]);
 
   useEffect(() => {
     fetch(`${process.env.NEXT_PUBLIC_API_URL}/company/job/list?page=${page}`, {
